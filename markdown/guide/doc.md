@@ -242,11 +242,14 @@ let doc = schema.node("doc", null, [
 
 ## Indexing
 
-ProseMirror nodes support two types of indexing—they can be treated as
-trees, using offsets into individual nodes, or they can be treated as
-a flat sequence of tokens.
+ProseMirror nodes support two types of indexing:
 
-The first allows you to do things similar to what you'd do with the
+1.  _Tree Indexing_ that treats nodes as trees, using offsets into
+    individual nodes
+
+2.  _Sequence Indexing_ that treats nodes as flat sequences of tokens
+
+Tree indexing allows you to do things similar to what you'd do with the
 DOM—interacting with single nodes, directly accessing child nodes
 using the [`child` method](##model.Node.child) and
 [`childCount`](##model.Node.childCount), writing recursive functions
@@ -254,7 +257,7 @@ that scan through a document (if you just want to look at all nodes,
 use [`descendants`](##model.Node.descendants) or
 [`nodesBetween`](##model.Node.nodesBetween)).
 
-The second is more useful when addressing a specific position in the
+Sequence indexing is more useful when addressing a specific position in the
 document. It allows any document position to be represented as an
 integer—the index in the token sequence. These tokens don't actually
 exist as objects in memory—they are just a counting convention—but the
@@ -293,7 +296,7 @@ The token sequence, with positions, looks like this:
      <blockquote> <p> T w o <img> </p> </blockquote>
 
 Each node has a [`nodeSize`](##model.Node.nodeSize) property that
-gives you the size of the entire node, and you can access
+gives you the token indexing size of the entire node, and you can access
 [`.content.size`](##model.Fragment.size) to get the size of the node's
 _content_. Note that for the outer document node, the open and close
 tokens are not considered part of the document (because you can't put
